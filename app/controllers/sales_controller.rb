@@ -1,13 +1,13 @@
 class SalesController < ApplicationController
-  def new
+  def upload_form
     @sale = Sale.new
   end
 
-  def index
+  def show_result
     @total_balance = flash[:total_balance]
   end
 
-  def create
+  def calculate_balance
     if params[:sale] && params[:sale][:file].present?
       file_content = params[:sale][:file].read
 
@@ -19,21 +19,21 @@ class SalesController < ApplicationController
 
           unless @sale.save
             flash[:alert] = "Falha no processamento do arquivo."
-            render :new
+            render :upload_form
             return
           end
         end
 
         total_balance = Sale.calculate_total_balance(parsed_data)
         flash[:total_balance] = total_balance
-        redirect_to sales_path, notice: "Arquivo processado com sucesso!", total_balance: total_balance
+        redirect_to show_result_sales_path, notice: "Arquivo processado com sucesso!"
       else
         flash[:alert] = "Falha no processamento do arquivo."
-        render :new
+        render :upload_form
       end
     else
       flash[:alert] = "Arquivo não encontrado."
-      render :new
+      render :upload_form
     end
   end
 
@@ -54,4 +54,4 @@ class SalesController < ApplicationController
 
     parsed_data
   end
- end
+end

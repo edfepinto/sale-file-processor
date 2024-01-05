@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
-  # get 'sales/new'
-  # get 'sales/create'
-  # get 'sales/show'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
+  resources :sales do
+    collection do
+      get "upload_form", to: "sales#upload_form"
+      post "calculate_balance", to: "sales#calculate_balance"
+      get "show_result", to: "sales#show_result"
+    end
+  end
 
-  resources :sales, only: [:new, :create, :index]
-  root to: 'sales#new'
+  root to: "sales#upload_form"
 end

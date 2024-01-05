@@ -1,0 +1,4 @@
+<%= form_with(model: @sale, url: calculate_balance_sales_path, multipart: true) do |form| %>
+  <%= form.file_field :file %>
+  <%= form.submit 'Enviar' %>
+<% end %>
