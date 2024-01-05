@@ -1,4 +1,16 @@
 <%= form_with(model: @sale, url: calculate_balance_sales_path, multipart: true) do |form| %>
   <%= form.file_field :file %>
-  <%= form.submit 'Enviar' %>
+  <%= form.submit "Enviar" %>
+
+  <% if flash.now[:alert] %>
+    <div>
+      <%= flash.now[:alert] %>
+    </div>
+  <% end %>
+
+  <% if flash.now[:notice] %>
+    <div>
+      <%= flash.now[:notice] %>
+    </div>
+  <% end %>
 <% end %>
