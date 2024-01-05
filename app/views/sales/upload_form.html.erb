@@ -1,16 +1,24 @@
-<%= form_with(model: @sale, url: calculate_balance_sales_path, multipart: true) do |form| %>
-  <%= form.file_field :file %>
-  <%= form.submit "Enviar" %>
+<div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+  <div style="width: 400px; padding: 20px; border: 1px solid #ccc; border-radius: 8px;">
+    <%= form_with(model: @sale, url: calculate_balance_sales_path, multipart: true) do |form| %>
+      <div style="margin-bottom: 10px;">
+        <%= form.file_field :file %>
+      </div>
+      <div style="margin-bottom: 10px;">
+        <%= form.submit "Enviar", class: "btn btn-primary" %>
+      </div>
 
-  <% if flash.now[:alert] %>
-    <div>
-      <%= flash.now[:alert] %>
-    </div>
-  <% end %>
+      <% if flash.now[:alert] %>
+        <div style="color: red; margin-bottom: 10px;">
+          <%= flash.now[:alert] %>
+        </div>
+      <% end %>
 
-  <% if flash.now[:notice] %>
-    <div>
-      <%= flash.now[:notice] %>
-    </div>
-  <% end %>
-<% end %>
+      <% if flash.now[:notice] %>
+        <div style="color: green; margin-bottom: 10px;">
+          <%= flash.now[:notice] %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
