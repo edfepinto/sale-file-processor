@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       get "upload_form", to: "sales#upload_form"
       post "calculate_balance", to: "sales#calculate_balance"
       get "show_result", to: "sales#show_result"
+      get "list_sales", to: "sales#list_sales"
     end
   end
 

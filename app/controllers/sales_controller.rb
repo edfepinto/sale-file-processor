@@ -2,6 +2,10 @@ class SalesController < ApplicationController
   def upload_form
     @sale = Sale.new
   end
+  
+  def list_sales
+    @sales = Sale.all
+  end
 
   def show_result
     @total_balance = flash[:total_balance]
