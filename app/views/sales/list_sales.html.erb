@@ -1,4 +1,6 @@
-<h1>Lista de vendas</h1>
+<h1>Lista de Vendas</h1>
+
+<%= link_to 'Adicionar Venda', new_sale_path %>
 
 <table>
   <thead>
@@ -6,7 +8,10 @@
       <th>Nome do comprador</th>
       <th>Descrição do Item</th>
       <th>Preço do Item</th>
-      <th>Nome do vendedor</th>
+      <th>Quantidade</th>
+      <th>Endereço do Vendedor</th>
+      <th>Nome do Vendedor</th>
+      <th>Ações</th>
     </tr>
   </thead>
   <tbody>
@@ -15,10 +20,18 @@
         <td><%= sale.purchaser_name%></td>
         <td><%= sale.item_description %></td>
         <td><%= sale.item_price %></td>
+        <td><%= sale.purchase_count %></td>
+        <td><%= sale.merchant_address %></td>
         <td><%= sale.merchant_name %></td>
+        <td>
+          <%= link_to 'Excluir', sale, data: { 
+            turbo_method: :delete, 
+            turbo_confirm: 'Você tem certeza?' 
+            }, 
+            class: 'btn btn-danger' 
+            %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-

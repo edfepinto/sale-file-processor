@@ -2,11 +2,50 @@ class SalesController < ApplicationController
   def upload_form
     @sale = Sale.new
   end
+
+  def new
+    @sale = Sale.new
+  end
+  
+  def create
+    @sale = Sale.new(sale_params)
+  
+    if @sale.save
+      flash[:success] = 'Venda adicionada com sucesso.'
+      redirect_to list_sales_sales_path
+    else
+      flash.now[:alert] = 'Erro ao adicionar venda.'
+      render :new
+    end
+  end
+
+  def edit
+    @sale = Sale.find(params[:id])
+  end
+  
+  def update
+    @sale = Sale.find(params[:id])
+  
+    if @sale.update(sale_params)
+      flash[:success] = 'Venda atualizada com sucesso.'
+      redirect_to list_sales_sales_path
+    else
+      flash.now[:alert] = 'Erro ao atualizar venda.'
+      render :edit
+    end
+  end
+
+  def destroy
+    sale = Sale.find(params[:id])
+    sale.destroy
+    flash[:success] = 'Venda excluída com sucesso.'
+    redirect_to list_sales_sales_path
+  end
   
   def list_sales
     @sales = Sale.all
   end
-
+  
   def show_result
     @total_balance = flash[:total_balance]
   end
@@ -47,19 +86,30 @@ class SalesController < ApplicationController
 
   private
 
-  def parse_file_content(content)
-    lines = content.force_encoding("UTF-8").split("\n")
-    header = lines.shift.split("\t").map { |column| column.downcase.gsub(" ", "_").strip }
-
-    parsed_data = []
-    lines.each do |line|
-      values = line.force_encoding("UTF-8").split("\t").map(&:strip)
-      data_hash = Hash[header.zip(values)]
-      parsed_data << data_hash
+    def sale_params
+      params.require(:sale).permit(
+        :purchaser_name, 
+        :item_description, 
+        :item_price, 
+        :purchase_count, 
+        :merchant_address, 
+        :merchant_name
+      )
     end
 
-    Rails.logger.info("parsed data: #{parsed_data}")
+    def parse_file_content(content)
+      lines = content.force_encoding("UTF-8").split("\n")
+      header = lines.shift.split("\t").map { |column| column.downcase.gsub(" ", "_").strip }
 
-    parsed_data
-  end
+      parsed_data = []
+      lines.each do |line|
+        values = line.force_encoding("UTF-8").split("\t").map(&:strip)
+        data_hash = Hash[header.zip(values)]
+        parsed_data << data_hash
+      end
+
+      Rails.logger.info("parsed data: #{parsed_data}")
+
+      parsed_data
+    end
 end
