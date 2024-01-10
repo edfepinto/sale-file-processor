@@ -57,6 +57,8 @@ class SalesController < ApplicationController
         parsed_data = parse_file_content(file_content)
 
         if parsed_data.present?
+          Sale.destroy_all
+          
           parsed_data.each do |data|
             @sale = Sale.new(data)
 
@@ -80,7 +82,7 @@ class SalesController < ApplicationController
       end
     rescue StandardError => e
       flash[:alert] = "Erro durante o processamento do arquivo: #{e.message}"
-      redirect_to upload_form_sales_path
+      redirect_to list_sales_sales_path
     end
   end
 
