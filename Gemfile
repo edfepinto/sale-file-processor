@@ -66,6 +66,5 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "carrierwave"
 gem "mini_magick"
 gem 'pg'

@@ -1,0 +1,37 @@
+<h1>Edit Sale</h1>
+
+<%= form_with(model: @sale, url: sale_path(@sale), method: :patch) do |form| %>
+  <div>
+    <%= form.label :purchaser_name, "Nome do Comprador" %>
+    <%= form.text_field :purchaser_name %>
+  </div>
+
+  <div>
+    <%= form.label :item_description, "Descrição do Item" %>
+    <%= form.text_field :item_description %>
+  </div>
+
+    <div>
+    <%= form.label :item_price, "Valor do Item" %>
+    <%= form.text_field :item_price %>
+  </div>
+
+  <div>
+    <%= form.label :purchase_count, "Quantidade" %>
+    <%= form.text_field :purchase_count %>
+  </div>
+
+  <div>
+    <%= form.label :merchant_address, "Endereço do vendedor" %>
+    <%= form.text_field :merchant_address %>
+  </div>
+
+  <div>
+    <%= form.label :merchant_name, "Nome do Vendedor" %>
+    <%= form.text_field :merchant_name %>
+  </div>
+
+  <div>
+    <%= form.submit 'Atualizar Venda' %>
+  </div>
+<% end %>

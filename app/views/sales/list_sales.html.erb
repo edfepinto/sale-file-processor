@@ -24,6 +24,10 @@
         <td><%= sale.merchant_address %></td>
         <td><%= sale.merchant_name %></td>
         <td>
+          <%= link_to 'Editar', 
+            edit_sale_path(sale), 
+            class: 'btn btn-primary' 
+          %>
           <%= link_to 'Excluir', sale, data: { 
             turbo_method: :delete, 
             turbo_confirm: 'Você tem certeza?' 
