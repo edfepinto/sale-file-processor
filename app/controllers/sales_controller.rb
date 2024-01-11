@@ -43,7 +43,7 @@ class SalesController < ApplicationController
   end
   
   def list_sales
-    @sales = Sale.all
+    @sales = Sale.paginate(page: params[:page], per_page: 10)
   
     if params[:search_term].present?
       search_term = "%#{params[:search_term]}%"

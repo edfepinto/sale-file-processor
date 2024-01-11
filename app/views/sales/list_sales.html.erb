@@ -1,3 +1,5 @@
+<!-- app/views/sales/list_sales.html.erb -->
+
 <!DOCTYPE html>
 <html lang="pt-Br">
 <head>
@@ -11,6 +13,8 @@
 </head>
 <body>
   <div class="content-container">
+
+    <%= link_to 'Adicionar Venda', new_sale_path, class: 'btn btn-add-sale btn-add-sale-top' %>
 
     <h1 class="custom-heading">Lista de Vendas</h1>
 
@@ -51,12 +55,16 @@
           <% end %>
         </tbody>
       </table>
-      
+      <div class="custom-pagination">
+        <%=
+          will_paginate @sales,
+          previous_label: '🡰 Anterior',
+          next_label: 'Próximo 🡲'
+         %>
+      </div>
     <% else %>
       <p class="no-results-message">Nenhum resultado encontrado para a pesquisa.</p>
     <% end %>
-
-    <%= link_to 'Adicionar Venda', new_sale_path, class: 'btn btn-add-sale' %>
   </div>
 </body>
 </html>

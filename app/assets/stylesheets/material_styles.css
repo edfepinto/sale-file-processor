@@ -25,11 +25,20 @@
 .btn-primary {
   background-color: #2196f3;
   color: #ffffff;
+  margin-top: 0;
+  border: 1px solid #1565c0;
 }
 
 .btn-danger {
-  background-color: #ff4081;
+  background-color: #ff0000;
   color: #ffffff;
+}
+
+.btn-add-sale-top {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  margin-top: 20px;
 }
 
 .search-form {
@@ -52,6 +61,12 @@
   border-color: #1565c0;
 }
 
+.table-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .custom-table {
   width: 100%;
   border-collapse: collapse;
@@ -63,6 +78,10 @@
   border: 2px solid #2196f3;
   padding: 16px;
   text-align: left;
+}
+
+body {
+  background-color: #f0f0f0;
 }
 
 .custom-table th {
@@ -112,4 +131,64 @@ body {
 .btn-add-sale {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.custom-pagination {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.custom-pagination a {
+  margin: 0 5px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  color: #2196f3;
+  background-color: #ffffff;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.custom-pagination a:hover {
+  background-color: #e1f5fe;
+}
+
+.custom-pagination .current {
+  background-color: #2196f3;
+  color: #ffffff;
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+.pagination li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.pagination a,
+.pagination span {
+  padding: 6px 12px;
+  text-decoration: none;
+  color: #2196f3;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.pagination a:hover {
+  background-color: #ddd;
+}
+
+.pagination .current {
+  border-color: #2196f3;
 }
