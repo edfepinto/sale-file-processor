@@ -63,6 +63,8 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
+  gem 'rspec-rails'
+  gem 'rails-controller-testing'
   gem "selenium-webdriver"
 end
 
@@ -72,3 +74,7 @@ gem 'material_icons', '~> 4.0.0'
 gem 'will_paginate', '~> 3.3'
 
 
+group :development, :test do
+  gem "pry"
+  gem "pry-nav"
+end

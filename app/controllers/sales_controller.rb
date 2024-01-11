@@ -9,8 +9,7 @@ class SalesController < ApplicationController
   
   def create
     @sale = Sale.new(sale_params)
-  
-    if @sale.save
+      if @sale.save
       flash[:success] = 'Venda adicionada com sucesso.'
       redirect_to list_sales_sales_path
     else
