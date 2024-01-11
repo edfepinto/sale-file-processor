@@ -192,3 +192,56 @@ body {
 .pagination .current {
   border-color: #2196f3;
 }
+
+.edit-sale-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-sale-heading {
+  color: #2196f3;
+  margin-bottom: 20px;
+}
+
+.edit-sale-form {
+  text-align: center;
+}
+
+.edit-sale-field {
+  margin-bottom: 20px;
+}
+
+.edit-sale-label {
+  font-weight: bold;
+}
+
+.edit-sale-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.edit-sale-submit {
+  display: inline-block;
+  background-color: #4caf50;
+  color: #ffffff;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  border: #45a049;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-sale-submit:hover {
+  background-color: #45a049;
+}

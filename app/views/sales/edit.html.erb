@@ -1,37 +1,54 @@
-<h1>Edit Sale</h1>
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Sale</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "application", "material_styles", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
+<body>
+  <div class="content-container edit-sale-container">
 
-<%= form_with(model: @sale, url: sale_path(@sale), method: :patch) do |form| %>
-  <div>
-    <%= form.label :purchaser_name, "Nome do Comprador" %>
-    <%= form.text_field :purchaser_name %>
-  </div>
+    <h1 class="custom-heading edit-sale-heading">Editar Venda</h1>
 
-  <div>
-    <%= form.label :item_description, "Descrição do Item" %>
-    <%= form.text_field :item_description %>
-  </div>
+    <%= form_with(model: @sale, url: sale_path(@sale), method: :patch, class: 'edit-sale-form') do |form| %>
+      <div class="edit-sale-field">
+        <%= form.label :purchaser_name, "Nome do Comprador", class: 'edit-sale-label' %>
+        <%= form.text_field :purchaser_name, class: 'edit-sale-input' %>
+      </div>
 
-    <div>
-    <%= form.label :item_price, "Valor do Item" %>
-    <%= form.text_field :item_price %>
-  </div>
+      <div class="edit-sale-field">
+        <%= form.label :item_description, "Descrição do Item", class: 'edit-sale-label' %>
+        <%= form.text_field :item_description, class: 'edit-sale-input' %>
+      </div>
 
-  <div>
-    <%= form.label :purchase_count, "Quantidade" %>
-    <%= form.text_field :purchase_count %>
-  </div>
+      <div class="edit-sale-field">
+        <%= form.label :item_price, "Valor do Item", class: 'edit-sale-label' %>
+        <%= form.text_field :item_price, class: 'edit-sale-input' %>
+      </div>
 
-  <div>
-    <%= form.label :merchant_address, "Endereço do vendedor" %>
-    <%= form.text_field :merchant_address %>
-  </div>
+      <div class="edit-sale-field">
+        <%= form.label :purchase_count, "Quantidade", class: 'edit-sale-label' %>
+        <%= form.text_field :purchase_count, class: 'edit-sale-input' %>
+      </div>
 
-  <div>
-    <%= form.label :merchant_name, "Nome do Vendedor" %>
-    <%= form.text_field :merchant_name %>
-  </div>
+      <div class="edit-sale-field">
+        <%= form.label :merchant_address, "Endereço do Vendedor", class: 'edit-sale-label' %>
+        <%= form.text_field :merchant_address, class: 'edit-sale-input' %>
+      </div>
 
-  <div>
-    <%= form.submit 'Atualizar Venda' %>
+      <div class="edit-sale-field">
+        <%= form.label :merchant_name, "Nome do Vendedor", class: 'edit-sale-label' %>
+        <%= form.text_field :merchant_name, class: 'edit-sale-input' %>
+      </div>
+
+      <div class="edit-sale-field">
+        <%= form.submit 'Atualizar Venda', class: 'btn edit-sale-submit' %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</body>
+</html>
