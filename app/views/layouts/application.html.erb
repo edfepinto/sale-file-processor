@@ -10,13 +10,14 @@
     <%= javascript_importmap_tags %>
   </head>
 
-      <nav>
+  <body>
+    <nav class="main-navigation">
       <ul>
         <li><%= link_to 'Upload de Arquivo', upload_form_sales_path %></li>
         <li><%= link_to 'Listagem de Vendas', list_sales_sales_path %></li>
       </ul>
     </nav>
-    
+
     <%= yield %>
   </body>
 </html>
