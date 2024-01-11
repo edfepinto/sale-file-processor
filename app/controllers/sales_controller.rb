@@ -44,12 +44,29 @@ class SalesController < ApplicationController
   
   def list_sales
     @sales = Sale.all
+  
+    if params[:search_term].present?
+      search_term = "%#{params[:search_term]}%"
+      @sales = @sales.where(
+        "CAST(purchaser_name AS TEXT) LIKE ? OR CAST(item_description AS TEXT) LIKE ? OR CAST(item_price AS TEXT) LIKE ? OR CAST(purchase_count AS TEXT) LIKE ? OR CAST(merchant_address AS TEXT) LIKE ? OR CAST(merchant_name AS TEXT) LIKE ?", 
+        search_term, search_term, search_term, search_term, search_term, search_term
+        )
+    end
+  
+    respond_to do |format|
+      format.html do
+        if @sales.empty?
+          flash.now[:notice] = "Nenhum resultado encontrado para a pesquisa."
+        end
+      end
+      format.json { render json: @sales }
+    end
   end
   
   def show_result
     @total_balance = flash[:total_balance]
   end
-
+  
   def calculate_balance
     begin
       if params[:sale] && params[:sale][:file].present?
