@@ -1,37 +1,39 @@
-<h1>Nova Venda</h1>
+<div class="new-sale-container">
+  <h1 class="new-sale-heading">Nova Venda</h1>
 
-<%= form_with(model: @sale, url: create_sale_sales_path , method: :post) do |form| %>
-  <div>
-    <%= form.label :purchaser_name, "Nome do Comprador" %>
-    <%= form.text_field :purchaser_name %>
-  </div>
+  <%= form_with(model: @sale, url: create_sale_sales_path, method: :post, class: 'new-sale-form') do |form| %>
+    <div class="new-sale-field">
+      <%= form.label :purchaser_name, "Nome do Comprador", class: 'new-sale-label' %>
+      <%= form.text_field :purchaser_name, class: 'new-sale-input' %>
+    </div>
 
-  <div>
-    <%= form.label :item_description, "Descrição do Item" %>
-    <%= form.text_field :item_description %>
-  </div>
+    <div class="new-sale-field">
+      <%= form.label :item_description, "Descrição do Item", class: 'new-sale-label' %>
+      <%= form.text_field :item_description, class: 'new-sale-input' %>
+    </div>
 
-    <div>
-    <%= form.label :item_price, "Valor do Item" %>
-    <%= form.text_field :item_price %>
-  </div>
+    <div class="new-sale-field">
+      <%= form.label :item_price, "Valor do Item", class: 'new-sale-label' %>
+      <%= form.text_field :item_price, class: 'new-sale-input' %>
+    </div>
 
-  <div>
-    <%= form.label :purchase_count, "Quantidade" %>
-    <%= form.text_field :purchase_count %>
-  </div>
+    <div class="new-sale-field">
+      <%= form.label :purchase_count, "Quantidade", class: 'new-sale-label' %>
+      <%= form.text_field :purchase_count, class: 'new-sale-input' %>
+    </div>
 
-  <div>
-    <%= form.label :merchant_address, "Endereço do vendedor" %>
-    <%= form.text_field :merchant_address %>
-  </div>
+    <div class="new-sale-field">
+      <%= form.label :merchant_address, "Endereço do vendedor", class: 'new-sale-label' %>
+      <%= form.text_field :merchant_address, class: 'new-sale-input' %>
+    </div>
 
-  <div>
-    <%= form.label :merchant_name, "Nome do Vendedor" %>
-    <%= form.text_field :merchant_name %>
-  </div>
+    <div class="new-sale-field">
+      <%= form.label :merchant_name, "Nome do Vendedor", class: 'new-sale-label' %>
+      <%= form.text_field :merchant_name, class: 'new-sale-input' %>
+    </div>
 
-  <div>
-    <%= form.submit 'Adicionar Venda' %>
-  </div>
-<% end %>
+    <div class="new-sale-field">
+      <%= form.submit 'Adicionar Venda', class: 'new-sale-submit' %>
+    </div>
+  <% end %>
+</div>
