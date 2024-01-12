@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag "sessions", "data-turbo-track": "reload" %>
+</head>
+<body>
+
+<div class="login-container">
+  <h1>Login</h1>
+
+  <%= form_with(url: login_path, method: :post, class: 'login-form') do |form| %>
+    <% if flash[:error] %>
+      <p class="error-message"><%= flash[:error] %></p>
+    <% end %>
+
+    <div>
+      <%= form.label :email %>
+      <%= form.text_field :email, required: true %>
+    </div>
+
+    <div>
+      <%= form.label :password %>
+      <%= form.password_field :password, required: true %>
+    </div>
+
+    <div>
+      <%= form.submit "Login" %>
+    </div>
+  <% end %>
+</div>
+
+</body>
+</html>

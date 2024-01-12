@@ -72,7 +72,7 @@ gem "mini_magick"
 gem 'pg'
 gem 'material_icons', '~> 4.0.0'
 gem 'will_paginate', '~> 3.3'
-
+gem 'bcrypt'
 
 group :development, :test do
   gem "pry"
