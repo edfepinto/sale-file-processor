@@ -1,10 +1,25 @@
-<h1>Editing user</h1>
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Usuário</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "application", "users", "data-turbo-track": "reload" %>
+</head>
+<body>
+  <div class="container">
+    <h1 class="edit-user-heading">Editar Usuário</h1>
 
-<%= render "form", user: @user %>
+    <%= render "form", user: @user %>
 
-<br>
+    <br>
 
-<div>
-  <%= link_to "Show this user", @user %> |
-  <%= link_to "Back to users", users_path %>
-</div>
+    <div>
+      <%= link_to "🡨 Voltar para Usuários", users_path, class: "back-to-users-link" %> |
+      <%= link_to "Mostrar Usuário", @user, class: "show-user-link" %>
+    </div>
+  </div>
+</body>
+</html>

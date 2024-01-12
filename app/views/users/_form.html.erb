@@ -1,23 +1,22 @@
-<%= form_with(model: user) do |form| %>
-  <% if user.errors.any? %>
-    <div style="color: red">
+<%= form_with(model: user, class: 'user-form') do |form| %>
+  <div class="error-message">
+    <% if user.errors.any? %>
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
+      <ul class="error-list">
         <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+          <li class="error-item"><%= error.full_message %></li>
         <% end %>
       </ul>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 
   <div>
-    <%= form.label :name, style: "display: block" %>
+    <%= form.label :name %>
     <%= form.text_field :name %>
   </div>
 
   <div>
-    <%= form.label :email, style: "display: block" %>
+    <%= form.label :email %>
     <%= form.text_field :email %>
   </div>
 

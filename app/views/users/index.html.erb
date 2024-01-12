@@ -1,14 +1,21 @@
-<p style="color: green"><%= notice %></p>
+<div class="users-container">
+  <p style="color: green"><%= notice %></p>
 
-<h1>Users</h1>
+  <h1>Usuários</h1>
 
-<div id="users">
-  <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
-  <% end %>
+  <div id="users">
+    <% @users.each do |user| %>
+      <div class="user-card">
+        <h2><%= user.name %></h2>
+        <p><%= user.email %></p>
+        <div class="user-links">
+          <%= link_to "Mostrar usuário", user %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="centered-button">
+    <%= link_to "Novo Usuário", new_user_path, class: 'new-user-link' %>
+  </div>
 </div>
-
-<%= link_to "New user", new_user_path %>

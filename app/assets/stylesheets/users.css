@@ -1,0 +1,222 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  color: #2196f3;
+  text-align: center;
+}
+
+#users {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.users-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.user-card {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 8px;
+  width: 300px;
+}
+
+.user-card h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.user-card p {
+  color: #555;
+}
+
+.user-links {
+  text-align: center;
+}
+
+.user-links a {
+  color: #2196f3;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.user-links a:hover {
+  text-decoration: underline;
+}
+
+.new-user-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.new-user-link:hover {
+  background-color: #45a049;
+}
+
+.notice {
+  color: green;
+}
+
+.user-details {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.user-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+}
+
+.edit-link,
+.back-link {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #2196f3;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.back-link:visited {
+  color: #fff;
+}
+
+.destroy-button {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #ff4081;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-user-heading {
+  color: #2196f3;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.edit-user-form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+}
+
+.edit-user-link,
+.show-user-link,
+.back-to-users-link {
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin: 0 10px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.edit-user-link {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.show-user-link,
+.back-to-users-link {
+  background-color: #2196f3;
+  color: #fff;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 20px;
+}
+
+.error-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.error-item {
+  margin-bottom: 8px;
+}
+
+form div {
+  margin-bottom: 16px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+form input[type='text'] {
+  width: 500px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form input[type='submit'] {
+  background-color: #4caf50;
+  color: #ffffff;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+form input[type='submit']:hover {
+  background-color: #45a049;
+}
+
+.new-user-container {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.custom-heading {
+  color: #2196f3;
+}
+
+.user-form {
+  margin-top: 20px;
+}
+
+.user-form div {
+  margin-bottom: 15px;
+}
