@@ -1,7 +1,7 @@
 <%= form_with(model: user, class: 'user-form') do |form| %>
   <div class="error-message">
     <% if user.errors.any? %>
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <h2><%= pluralize(user.errors.count, "error") %> Houve um problema e este usuário está proibido de ser salvo.</h2>
       <ul class="error-list">
         <% user.errors.each do |error| %>
           <li class="error-item"><%= error.full_message %></li>
@@ -11,20 +11,26 @@
   </div>
 
   <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.label 'Nome'%>
+    <%= form.text_field :name, class: "form-input" %>
   </div>
 
   <div>
-    <%= form.label :email %>
-    <%= form.text_field :email %>
+    <%= form.label "E-mail"%>
+    <%= form.text_field :email, class: "form-input" %>
   </div>
 
   <div>
-    <%= form.label :password %>
-    <%= form.text_field :password %>
+    <%= form.label 'Senha'%>
+    <%= form.text_field :password, class: "form-input" %>
   </div>
+
   <div>
-    <%= form.submit %>
+    <%= form.label 'Permissão'%>
+    <%= form.select :role, options_for_select(User.roles.keys.map { |key| [key.humanize, key] }), {} %>
+  </div>
+
+  <div>
+    <%= form.submit 'Salvar' %>
   </div>
 <% end %>
