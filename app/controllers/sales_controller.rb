@@ -1,4 +1,6 @@
 class SalesController < ApplicationController
+  before_action :require_login, except: [:upload_form, :calculate_balance, :show_result]
+
   def upload_form
     @sale = Sale.new
   end
@@ -6,10 +8,11 @@ class SalesController < ApplicationController
   def new
     @sale = Sale.new
   end
-  
+
   def create
-    @sale = Sale.new(sale_params)
-      if @sale.save
+    @sale = current_user.sales.build(sale_params)
+    
+    if @sale.save
       flash[:success] = 'Venda adicionada com sucesso.'
       redirect_to list_sales_sales_path
     else
@@ -19,12 +22,12 @@ class SalesController < ApplicationController
   end
 
   def edit
-    @sale = Sale.find(params[:id])
+    @sale = current_user.sales.find(params[:id])
   end
-  
+
   def update
-    @sale = Sale.find(params[:id])
-  
+    @sale = current_user.sales.find(params[:id])
+
     if @sale.update(sale_params)
       flash[:success] = 'Venda atualizada com sucesso.'
       redirect_to list_sales_sales_path
@@ -35,23 +38,23 @@ class SalesController < ApplicationController
   end
 
   def destroy
-    sale = Sale.find(params[:id])
-    sale.destroy
+    @sale = current_user.sales.find(params[:id])
+    @sale.destroy
     flash[:success] = 'Venda excluída com sucesso.'
     redirect_to list_sales_sales_path
   end
-  
+
   def list_sales
-    @sales = Sale.paginate(page: params[:page], per_page: 10)
-  
+    @sales = current_user.sales.paginate(page: params[:page], per_page: 10)
+
     if params[:search_term].present?
       search_term = "%#{params[:search_term]}%"
       @sales = @sales.where(
         "CAST(purchaser_name AS TEXT) LIKE ? OR CAST(item_description AS TEXT) LIKE ? OR CAST(item_price AS TEXT) LIKE ? OR CAST(purchase_count AS TEXT) LIKE ? OR CAST(merchant_address AS TEXT) LIKE ? OR CAST(merchant_name AS TEXT) LIKE ?", 
         search_term, search_term, search_term, search_term, search_term, search_term
-        )
+      )
     end
-  
+
     respond_to do |format|
       format.html do
         if @sales.empty?
@@ -61,11 +64,11 @@ class SalesController < ApplicationController
       format.json { render json: @sales }
     end
   end
-  
+
   def show_result
     @total_balance = flash[:total_balance]
   end
-  
+
   def calculate_balance
     begin
       if params[:sale] && params[:sale][:file].present?
@@ -73,10 +76,10 @@ class SalesController < ApplicationController
         parsed_data = parse_file_content(file_content)
 
         if parsed_data.present?
-          Sale.destroy_all
-          
+          current_user.sales.destroy_all
+
           parsed_data.each do |data|
-            @sale = Sale.new(data)
+            @sale = current_user.sales.build(data)
 
             unless @sale.save
               flash[:alert] = "Falha no processamento do arquivo."
@@ -104,30 +107,30 @@ class SalesController < ApplicationController
 
   private
 
-    def sale_params
-      params.require(:sale).permit(
-        :purchaser_name, 
-        :item_description, 
-        :item_price, 
-        :purchase_count, 
-        :merchant_address, 
-        :merchant_name
-      )
+  def sale_params
+    params.require(:sale).permit(
+      :purchaser_name, 
+      :item_description, 
+      :item_price, 
+      :purchase_count, 
+      :merchant_address, 
+      :merchant_name
+    )
+  end
+
+  def parse_file_content(content)
+    lines = content.force_encoding("UTF-8").split("\n")
+    header = lines.shift.split("\t").map { |column| column.downcase.gsub(" ", "_").strip }
+
+    parsed_data = []
+    lines.each do |line|
+      values = line.force_encoding("UTF-8").split("\t").map(&:strip)
+      data_hash = Hash[header.zip(values)]
+      parsed_data << data_hash
     end
 
-    def parse_file_content(content)
-      lines = content.force_encoding("UTF-8").split("\n")
-      header = lines.shift.split("\t").map { |column| column.downcase.gsub(" ", "_").strip }
+    Rails.logger.info("parsed data: #{parsed_data}")
 
-      parsed_data = []
-      lines.each do |line|
-        values = line.force_encoding("UTF-8").split("\t").map(&:strip)
-        data_hash = Hash[header.zip(values)]
-        parsed_data << data_hash
-      end
-
-      Rails.logger.info("parsed data: #{parsed_data}")
-
-      parsed_data
-    end
+    parsed_data
+  end
 end

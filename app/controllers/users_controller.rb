@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @hide_back_link = params[:from_login].present?
   end
 
   def edit
@@ -42,7 +43,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy!
+    @user.destroy
 
     respond_to do |format|
       format.html { redirect_to users_url, notice: "Usuário excluído com sucesso!" }
@@ -57,5 +58,14 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :password, :role)
+    end
+
+    private
+
+    def require_admin
+      unless current_user && current_user.administrador?
+        flash[:alert] = 'Acesso não autorizado.'
+        redirect_to root_path
+      end
     end
 end

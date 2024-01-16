@@ -1,5 +1,5 @@
 class Sale < ApplicationRecord
-  # mount_uploader :file, FileUploader
+  belongs_to :user
   validates :item_price, presence: true
   
   def self.calculate_total_balance(parsed_data)

@@ -1,24 +1,28 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Sistema de Vendas</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Vendas</title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag "application", "users", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
 
-    <%= stylesheet_link_tag "application", "users", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
-
-<%# #<%= "login-page"  unless controller_name == 'sessions' && action_name == 'new' %>
-  <body class="login-page">
-    <nav class="main-navigation">
-      <ul>
-        <li><%= link_to 'Upload de Arquivo', upload_form_sales_path %></li>
-        <li><%= link_to 'Listagem de Vendas', list_sales_sales_path %></li>
-        <li><%= link_to 'Listagem de Usuários', users_path %></li>
-      </ul>
-    </nav>
-    <%= yield %>
-  </body>
+<body>
+  <nav class="main-navigation">
+    <ul>
+      <li><%= link_to 'Upload de Arquivo', upload_form_sales_path %></li>
+      <li><%= link_to 'Listagem de Vendas', list_sales_sales_path %></li>
+      <li><%= link_to 'Listagem de Usuários', users_path %></li>
+      <% if session[:user_id] %>
+        <li class="welcome-message">Bem-vindo, <%= session[:user_name] %>!</li>
+        <li><%= button_to 'Sair', logout_path, method: :delete, class: 'logout-button' %></li>
+      <% else %>
+        <li><%= link_to 'Entrar', login_path %></li>
+      <% end %>
+    </ul>
+  </nav>
+  <%= yield %>
+</body>
 </html>
