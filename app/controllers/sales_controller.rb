@@ -1,5 +1,5 @@
 class SalesController < ApplicationController
-  before_action :require_login, except: [:upload_form, :calculate_balance, :show_result]
+  before_action :require_login, only: [:upload_form, :calculate_balance, :show_result]
 
   def upload_form
     @sale = Sale.new
@@ -45,16 +45,24 @@ class SalesController < ApplicationController
   end
 
   def list_sales
-    @sales = current_user.sales.paginate(page: params[:page], per_page: 10)
-
-    if params[:search_term].present?
-      search_term = "%#{params[:search_term]}%"
-      @sales = @sales.where(
-        "CAST(purchaser_name AS TEXT) LIKE ? OR CAST(item_description AS TEXT) LIKE ? OR CAST(item_price AS TEXT) LIKE ? OR CAST(purchase_count AS TEXT) LIKE ? OR CAST(merchant_address AS TEXT) LIKE ? OR CAST(merchant_name AS TEXT) LIKE ?", 
-        search_term, search_term, search_term, search_term, search_term, search_term
-      )
+    if current_user
+      @sales = current_user.sales.paginate(page: params[:page], per_page: 10)
+  
+      if params[:search_term].present?
+        search_term = "%#{params[:search_term]}%"
+        @sales = @sales.where(
+          "CAST(purchaser_name AS TEXT) LIKE ? OR CAST(item_description AS TEXT) LIKE ? OR CAST(item_price AS TEXT) LIKE ? OR CAST(purchase_count AS TEXT) LIKE ? OR CAST(merchant_address AS TEXT) LIKE ? OR CAST(merchant_name AS TEXT) LIKE ?", 
+          search_term, search_term, search_term, search_term, search_term, search_term
+        )
+      end
+    else
+      flash[:alert] = 'Você precisa estar logado para acessar esta página.'
+      redirect_to login_path
+      return
     end
-
+  
+    @sales ||= []
+  
     respond_to do |format|
       format.html do
         if @sales.empty?
@@ -64,6 +72,7 @@ class SalesController < ApplicationController
       format.json { render json: @sales }
     end
   end
+  
 
   def show_result
     @total_balance = flash[:total_balance]
@@ -132,5 +141,14 @@ class SalesController < ApplicationController
     Rails.logger.info("parsed data: #{parsed_data}")
 
     parsed_data
+  end
+
+  private
+
+  def require_login
+    unless current_user
+      flash[:alert] = 'Você precisa estar logado para acessar esta página.'
+      redirect_to login_path
+    end
   end
 end

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :require_login, except: [:new, :create]
 
   def index
     @users = User.all
@@ -62,10 +62,10 @@ class UsersController < ApplicationController
 
     private
 
-    def require_admin
-      unless current_user && current_user.administrador?
-        flash[:alert] = 'Acesso não autorizado.'
-        redirect_to root_path
+    def require_login
+      unless session[:user_id]
+        flash[:alert] = 'Você precisa estar logado para acessar esta página.'
+        redirect_to login_path
       end
     end
 end
