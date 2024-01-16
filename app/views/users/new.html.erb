@@ -3,7 +3,9 @@
 
   <%= render "form", user: @user %>
 
-  <div class="back-link">
-    <%= link_to "🡨 Voltar para Usuários", users_path %>
-  </div>
+  <% if session[:user_id] %>
+    <div class="back-link">
+      <%= link_to "🡨 Voltar para Usuários", users_path %>
+    </div>
+  <% end %>
 </div>
