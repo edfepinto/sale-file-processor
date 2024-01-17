@@ -8,7 +8,9 @@
       <div class="user-card">
         <h2><%= user.name %></h2>
         <p><%= user.email %></p>
-        <p>Permissão: <b><%= user.role %></b></p>
+        <% if user.role %>
+          <p>Permissão: <b><%= user.role %></b></p>
+        <% end %>
         <div class="user-links">
           <%= link_to "Mostrar usuário", user %>
         </div>
