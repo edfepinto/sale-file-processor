@@ -34,6 +34,7 @@ docker run --name sale_file_processor_db -e POSTGRES_PASSWORD=secretpassword -p 
 ```
 rails db:create
 rails db:migrate
+rails db:seed
 ```
 
 ## Executando a aplicação
