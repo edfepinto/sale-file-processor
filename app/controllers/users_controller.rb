@@ -28,7 +28,7 @@ class UsersController < ApplicationController
       if @user.save
         log_in @user
 
-        format.html { redirect_to user_url(@user), notice: "Usuário criado e logado com sucesso!" }
+        format.html { redirect_to list_sales_sales_path, notice: "Usuário criado e logado com sucesso!" }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
