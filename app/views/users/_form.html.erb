@@ -1,7 +1,7 @@
 <%= form_with(model: user, class: 'user-form') do |form| %>
   <div class="error-message">
     <% if user.errors.any? %>
-      <h2><%= pluralize(user.errors.count, "error") %> Houve um problema e este usuário está proibido de ser salvo.</h2>
+      <h2>Houve um problema e este usuário não pode ser criado.</h2>
       <ul class="error-list">
         <% user.errors.each do |error| %>
           <li class="error-item"><%= error.full_message %></li>
