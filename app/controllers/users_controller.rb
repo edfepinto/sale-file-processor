@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :require_login, except: [:new, :create]
+  before_action :require_admin, except: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -92,7 +93,8 @@ class UsersController < ApplicationController
   private
 
   def require_admin
-    unless current_user&.admin?
+    unless current_user && current_user.admin?
+      flash[:alert] = 'Acesso negado. Você não tem permissão para acessar essa página.'
       redirect_to root_path
     end
   end
