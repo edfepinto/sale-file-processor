@@ -25,11 +25,13 @@
     <%= form.text_field :password, class: "form-input" %>
   </div>
 
-  <div>
-    <%= form.label 'Permissão'%>
-    <%= form.select :role, options_for_select(User.roles.keys.map { |key| [key.humanize, key] }), {} %>
-  </div>
-
+  <% if session[:user_id] %>
+    <div>
+      <%= form.label 'Permissão'%>
+      <%= form.select :role, options_for_select(User.roles.keys.map { |key| [key.humanize, key] }), {} %>
+    </div>
+  <% end %>
+  
   <div>
     <%= form.submit 'Salvar' %>
   </div>
