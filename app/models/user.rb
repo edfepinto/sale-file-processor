@@ -5,4 +5,8 @@ class User < ApplicationRecord
   enum role: [:comum, :admnistrador]
 
   validates :email, presence: true, uniqueness: { message: "já está em uso" }
+
+  def admin?
+    role == 'admnistrador'
+  end
 end

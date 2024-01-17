@@ -20,5 +20,5 @@ Rails.application.routes.draw do
 
   get 'up', to: 'rails/health#show', as: :rails_health_check
   
-  root to: 'sales#upload_form'
+  root to: 'sales#list_sales'
 end

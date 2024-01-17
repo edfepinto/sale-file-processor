@@ -15,7 +15,9 @@
     <% if session[:user_id] %>
       <li><%= link_to 'Upload de Arquivo', upload_form_sales_path %></li>
       <li><%= link_to 'Listagem de Vendas', list_sales_sales_path %></li>
-      <li><%= link_to 'Listagem de Usuários', users_path %></li>
+      <% if current_user && current_user.admin? %>
+        <li><%= link_to 'Listagem de Usuários', users_path %></li>
+      <% end %>
     <% end %>
       <% if session[:user_id] %>
         <li class="welcome-message">Bem-vindo, <%= session[:user_name] %>!</li>

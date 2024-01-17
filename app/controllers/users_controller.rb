@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
   end
 
   def new
@@ -15,6 +16,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def create
@@ -41,6 +43,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = User.find(params[:id])
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to user_url(@user), notice: "Usuário atualizado com sucesso!" }
@@ -53,6 +56,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params[:id])
     @user.destroy
 
     respond_to do |format|
@@ -83,5 +87,13 @@ class UsersController < ApplicationController
   def log_in(user)
     session[:user_id] = user.id
     session[:user_name] = user.name
+  end
+
+  private
+
+  def require_admin
+    unless current_user&.admin?
+      redirect_to root_path
+    end
   end
 end
