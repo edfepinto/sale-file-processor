@@ -12,14 +12,17 @@
 <body>
   <nav class="main-navigation">
     <ul>
+    <% if session[:user_id] %>
       <li><%= link_to 'Upload de Arquivo', upload_form_sales_path %></li>
       <li><%= link_to 'Listagem de Vendas', list_sales_sales_path %></li>
       <li><%= link_to 'Listagem de Usuários', users_path %></li>
+    <% end %>
       <% if session[:user_id] %>
         <li class="welcome-message">Bem-vindo, <%= session[:user_name] %>!</li>
         <li><%= button_to 'Sair', logout_path, method: :delete, class: 'logout-button' %></li>
       <% else %>
         <li><%= link_to 'Entrar', login_path %></li>
+        <li><%= link_to 'Registre-se', new_user_path, class: "form-link" %></li>
       <% end %>
     </ul>
   </nav>
