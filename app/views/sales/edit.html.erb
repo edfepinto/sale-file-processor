@@ -17,38 +17,72 @@
     <%= form_with(model: @sale, url: sale_path(@sale), method: :patch, class: 'edit-sale-form') do |form| %>
       <div class="edit-sale-field">
         <%= form.label :purchaser_name, "Nome do Comprador", class: 'edit-sale-label' %>
-        <%= form.text_field :purchaser_name, class: 'edit-sale-input' %>
+        <%= form.text_field :purchaser_name, class: 'edit-sale-input', data: { max_length: 30 } %>
+        <% if @sale.errors[:purchaser_name].any? %>
+          <p class="edit-sale-error"><%= @sale.errors.full_messages_for(:purchaser_name).join(', ') %></p>
+        <% end %>
       </div>
 
       <div class="edit-sale-field">
         <%= form.label :item_description, "Descrição do Item", class: 'edit-sale-label' %>
-        <%= form.text_field :item_description, class: 'edit-sale-input' %>
+        <%= form.text_field :item_description, class: 'edit-sale-input', data: { max_length: 30 } %>
+        <% if @sale.errors[:item_description].any? %>
+          <p class="edit-sale-error"><%= @sale.errors.full_messages_for(:item_description).join(', ') %></p>
+        <% end %>
       </div>
 
       <div class="edit-sale-field">
         <%= form.label :item_price, "Valor do Item", class: 'edit-sale-label' %>
-        <%= form.text_field :item_price, class: 'edit-sale-input' %>
+        <%= form.text_field :item_price, class: 'edit-sale-input', data: { max_length: 4 } %>
+        <% if @sale.errors[:item_price].any? %>
+          <p class="edit-sale-error"><%= @sale.errors.full_messages_for(:item_price).join(', ') %></p>
+        <% end %>
       </div>
 
       <div class="edit-sale-field">
         <%= form.label :purchase_count, "Quantidade", class: 'edit-sale-label' %>
-        <%= form.text_field :purchase_count, class: 'edit-sale-input' %>
+        <%= form.text_field :purchase_count, class: 'edit-sale-input', data: { max_length: 2 } %>
+        <% if @sale.errors[:purchase_count].any? %>
+          <p class="edit-sale-error"><%= @sale.errors.full_messages_for(:purchase_count).join(', ') %></p>
+        <% end %>
       </div>
 
       <div class="edit-sale-field">
         <%= form.label :merchant_address, "Endereço do Vendedor", class: 'edit-sale-label' %>
-        <%= form.text_field :merchant_address, class: 'edit-sale-input' %>
+        <%= form.text_field :merchant_address, class: 'edit-sale-input', data: { max_length: 30 } %>
+        <% if @sale.errors[:merchant_address].any? %>
+          <p class="edit-sale-error"><%= @sale.errors.full_messages_for(:merchant_address).join(', ') %></p>
+        <% end %>
       </div>
 
       <div class="edit-sale-field">
         <%= form.label :merchant_name, "Nome do Vendedor", class: 'edit-sale-label' %>
-        <%= form.text_field :merchant_name, class: 'edit-sale-input' %>
+        <%= form.text_field :merchant_name, class: 'edit-sale-input', data: { max_length: 30 } %>
+        <% if @sale.errors[:merchant_name].any? %>
+          <p class="edit-sale-error"><%= @sale.errors.full_messages_for(:merchant_name).join(', ') %></p>
+        <% end %>
       </div>
 
       <div class="edit-sale-field">
         <%= form.submit 'Atualizar Venda', class: 'btn edit-sale-submit' %>
       </div>
     <% end %>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        let inputFields = document.querySelectorAll('.edit-sale-input');
+
+        inputFields.forEach(function (inputField) {
+          inputField.addEventListener('input', function () {
+            let maxLength = this.getAttribute('data-max-length');
+            if (this.value.length > maxLength) {
+              this.value = this.value.slice(0, maxLength);
+            }
+          });
+        });
+      });
+    </script>
+
   </div>
 </body>
 </html>
