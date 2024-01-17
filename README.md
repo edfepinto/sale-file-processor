@@ -34,6 +34,7 @@ docker run --name sale_file_processor_db -e POSTGRES_PASSWORD=secretpassword -p 
 ```
 rails db:create
 rails db:migrate
+rails db:seed
 ```
 
 ## Executando a aplicação
@@ -41,6 +42,7 @@ rails db:migrate
 1. Inicie o servidor Rails:
 ```
 rails server
+faça login utilizando o usuário: eduardo@email.com com a senha: eduardo
 ```
 
 ## Demonstração do projeto
