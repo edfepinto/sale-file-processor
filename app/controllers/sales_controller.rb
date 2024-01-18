@@ -17,7 +17,7 @@ class SalesController < ApplicationController
       redirect_to list_sales_sales_path
     else
       flash.now[:alert] = 'Erro ao adicionar venda.'
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -33,7 +33,7 @@ class SalesController < ApplicationController
       redirect_to list_sales_sales_path
     else
       flash.now[:alert] = 'Erro ao atualizar venda.'
-      render :edit
+      render :edit, status: :unprocessable_entity 
     end
   end
 

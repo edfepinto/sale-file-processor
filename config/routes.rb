@@ -13,8 +13,6 @@ Rails.application.routes.draw do
       post "calculate_balance", to: "sales#calculate_balance"
       get "show_result", to: "sales#show_result"
       get "list_sales", to: "sales#list_sales"
-      get "new", to: "sales#new"
-      post "create_sale", to: "sales#create"
     end
   end
 

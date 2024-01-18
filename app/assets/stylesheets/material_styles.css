@@ -300,10 +300,9 @@ body {
   background-color: #45a049;
 }
 
-.error-message {
+.error {
   color: #ff0000;
   font-size: 14px;
-  margin-top: 5px;
 }
 
 .edit-sale-field {

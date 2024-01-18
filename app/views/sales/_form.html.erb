@@ -1,0 +1,89 @@
+<%= form_with model: sale do |form| %>
+  <div class="new-sale-field">
+    <%= form.label :purchaser_name, "Nome do Comprador", class: 'new-sale-label' %>
+    <%= form.text_field :purchaser_name, class: 'new-sale-input', data: { max_length: 30, min_length: 10 } %>
+    <% if @sale.errors[:purchaser_name].any? %>
+      <% @sale.errors[:purchaser_name].each do |message| %>
+      <p class="error"><%= message %></p>
+    <% end %>
+    <% end %>
+  </div>
+
+  <div class="new-sale-field">
+    <%= form.label :item_description, "Descrição do Item", class: 'new-sale-label' %>
+    <%= form.text_field :item_description, class: 'new-sale-input', data: { max_length: 30, min_length: 10 } %>
+    <% if @sale.errors[:item_description].any? %>
+      <% @sale.errors[:item_description].each do |message| %>
+      <p class="error"><%= message %></p>
+    <% end %>
+    <% end %>
+  </div>
+
+  <div class="new-sale-field">
+    <%= form.label :item_price, "Valor do Item", class: 'new-sale-label' %>
+    <%= form.number_field :item_price, class: 'new-sale-input', data: { max_length: 4, min_length: 2 } %>
+    <% if @sale.errors[:item_price].any? %>
+      <% @sale.errors[:item_price].each do |message| %>
+      <p class="error"><%= message %></p>
+    <% end %>
+    <% end %>
+  </div>
+
+  <div class="new-sale-field">
+    <%= form.label :purchase_count, "Quantidade", class: 'new-sale-label' %>
+    <%= form.text_field :purchase_count, class: 'new-sale-input', data: { max_length: 2, min_length: 1 } %>
+    <% if @sale.errors[:purchase_count].any? %>
+      <% @sale.errors[:purchase_count].each do |message| %>
+      <p class="error"><%= message %></p>
+    <% end %>
+    <% end %>
+  </div>
+
+  <div class="new-sale-field">
+    <%= form.label :merchant_address, "Endereço do vendedor", class: 'new-sale-label' %>
+    <%= form.text_field :merchant_address, class: 'new-sale-input', data: { max_length: 30, min_length: 10 } %>
+    <% if @sale.errors[:merchant_address].any? %>
+      <% @sale.errors[:merchant_address].each do |message| %>
+      <p class="error"><%= message %></p>
+    <% end %>
+    <% end %>
+  </div>
+
+  <div class="new-sale-field">
+    <%= form.label :merchant_name, "Nome do Vendedor", class: 'new-sale-label' %>
+    <%= form.text_field :merchant_name, class: 'new-sale-input', data: { max_length: 30, min_length: 10 } %>
+    <% if @sale.errors[:merchant_name].any? %>
+      <% @sale.errors[:merchant_name].each do |message| %>
+      <p class="error"><%= message %></p>
+    <% end %>
+    <% end %>
+  </div>
+
+  <div class="new-sale-field">
+    <%= form.submit 'Adicionar Venda', class: 'new-sale-submit' %>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener('turbo:load', function () {
+    const inputFields = document.querySelectorAll('.new-sale-input');
+
+    inputFields.forEach(function (inputField) {
+      inputField.addEventListener('input', function () {
+        const maxLength = this.getAttribute('data-max-length');
+        const minLength = this.getAttribute('data-min-length');
+        const currentValue = this.value;
+
+        if (currentValue.length > maxLength) {
+          this.value = currentValue.slice(0, maxLength);
+        }
+
+        if (currentValue.length < minLength) {
+          this.setCustomValidity('Insira pelo menos ' + minLength + ' caracteres.');
+        } else {
+          this.setCustomValidity('');
+        }
+      });
+    });
+  });
+</script>
