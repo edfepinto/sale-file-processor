@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include UsersHelper
   helper_method :current_user, :logged_in?
 
   private

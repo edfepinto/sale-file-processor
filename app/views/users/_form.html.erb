@@ -4,30 +4,32 @@
       <h2>Houve um problema e este usuário não pode ser criado.</h2>
       <ul class="error-list">
         <% user.errors.each do |error| %>
-          <li class="error-item"><%= error.full_message %></li>
+          <li class="error-item">
+            <%= "#{custom_error_message(error)}" %>
+          </li>
         <% end %>
       </ul>
     <% end %>
   </div>
 
   <div>
-    <%= form.label 'Nome'%>
-    <%= form.text_field :name, class: "form-input" %>
+    <%= form.label 'Nome' %>
+    <%= form.text_field :name, class: "form-input", maxlength: "30", minlength: "4" %>
   </div>
 
   <div>
-    <%= form.label "E-mail"%>
+    <%= form.label "E-mail" %>
     <%= form.text_field :email, class: "form-input" %>
   </div>
 
   <div>
-    <%= form.label 'Senha'%>
+    <%= form.label 'Senha' %>
     <%= form.text_field :password, class: "form-input" %>
   </div>
 
   <% if session[:user_id] %>
     <div>
-      <%= form.label 'Permissão'%>
+      <%= form.label 'Permissão' %>
       <%= form.select :role, options_for_select(User.roles.keys.map { |key| [key.humanize, key] }), {} %>
     </div>
   <% end %>

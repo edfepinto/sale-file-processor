@@ -4,8 +4,11 @@ class User < ApplicationRecord
   has_secure_password
   enum role: [:comum, :admnistrador]
 
-  validates :email, presence: true, uniqueness: { message: "já está em uso" }
+  validates :email, uniqueness: true, format: { 
+    with: URI::MailTo::EMAIL_REGEXP, 
+  }
 
+  
   def admin?
     role == 'admnistrador'
   end
