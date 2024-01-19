@@ -1,5 +1,5 @@
 class SalesController < ApplicationController
-  before_action :require_login, only: [:upload_form, :calculate_balance, :show_result]
+  before_action :require_login
 
   def upload_form
     @sale = Sale.new
@@ -20,7 +20,7 @@ class SalesController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-
+  
   def edit
     @sale = current_user.sales.find(params[:id])
   end

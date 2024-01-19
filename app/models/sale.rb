@@ -1,4 +1,6 @@
 class Sale < ApplicationRecord
+  belongs_to :user
+  
   validates :purchaser_name, presence: { message: "Campo obrigatório" }
   validates :item_description, presence: { message: "Campo obrigatório" }
   validates :item_price, presence: { message: "Campo obrigatório" }

@@ -1,19 +1,34 @@
 require 'rails_helper'
 
 RSpec.describe 'Sale creation', type: :request do
+  let!(:current_user) do
+    password = BCrypt::Password.create('sua_senha')
+
+    User.create(
+      name: 'string',
+      email: 'teste@email.com',
+      password: password,
+      role: 1
+    )
+  end
+
+  before do
+    post '/login', params: { email: current_user.email, password: current_user.password }
+  end
+
   describe 'GET /sales/new' do
-    it 'Renderiza um formulário de nova venda' do
+    it 'renderiza um formulário de nova venda' do
       get new_sale_path
       expect(response).to render_template(:new)
     end
   end
 
   describe 'POST /sales' do
-    context 'with valid parameters' do
-      it 'Criar uma nova venda' do
+    context 'com parâmetros válidos' do
+      it 'cria uma nova venda' do
         sale_params = {
           purchaser_name: 'João Qualquer',
-          item_description: 'Examplo Qualquer',
+          item_description: 'Exemplo Qualquer',
           item_price: 20.0,
           purchase_count: 2,
           merchant_address: 'Esplanada',
@@ -29,8 +44,8 @@ RSpec.describe 'Sale creation', type: :request do
       end
     end
 
-    context 'Com arguementos invalídos' do
-      it 'Não foi possivel criar uma nova venda' do
+    context 'com argumentos inválidos' do
+      it 'não foi possível criar uma nova venda' do
         sale_params = { purchaser_name: 'João Qualquer' }
 
         expect {
